@@ -30,8 +30,8 @@ public class ProductServiceImpl implements ProductService {
 		System.out.println(this.getClass());
 	}
 
-	public void addProduct(Product product) throws Exception {
-		productDao.addProduct(product);
+	public int addProduct(Product product) throws Exception {
+		return productDao.addProduct(product);
 	}
 
 	public Product getProduct(int no) throws Exception {

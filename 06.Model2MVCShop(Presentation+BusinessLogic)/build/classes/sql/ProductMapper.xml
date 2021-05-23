@@ -49,12 +49,12 @@
 	  					FROM		(	SELECT p.prod_name , p.price, p.prod_no, t.TRAN_STATUS_CODE
 											FROM product p, transaction t
 											<where>
-											p.prod_no = t.tran_no
+											p.prod_no = t.tran_no(+)
 											<if test="searchCondition != null">
-													<if test="searchCondition == 0 and searchKeyword !='' ">
+													<if test="searchCondition == 1 and searchKeyword !='' ">
 										 				AND prod_name = #{searchKeyword}
 													</if>
-													<if test="searchCondition == 1 and searchKeyword !='' ">
+													<if test="searchCondition == 2 and searchKeyword !='' ">
 										 				AND price = #{searchKeyword}
 													</if>
 											</if>

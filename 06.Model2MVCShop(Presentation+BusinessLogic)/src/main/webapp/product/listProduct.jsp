@@ -5,7 +5,7 @@
 	
 <html>
 <head>
-<title><c:if test="${menu == 'manage' }">
+<title><c:if test="${ menu == 'manage' }">
 			상품관리
 		</c:if>
 		<c:if test="${ menu == 'search' }">
@@ -118,7 +118,7 @@
 	</tr>
 	<c:set var="i" value="0"/>
 		<c:forEach var="purchase" items="${ list }">
-		<c:set var="product" value="${purchase.purchaseProd}"/>
+		<c:set var="product" value="${ purchase }"/>
 		<c:set var="i" value="${ i+1 }"/>
 		<tr class="ct_list_pop">
 			<td align="center">${ i }</td>
@@ -159,7 +159,7 @@
 		 			<c:if test="${empty purchase.tranCode}">
 		 				판매중
 		 			</c:if>
-		 			<c:if test="${purchase.tranCode == '1' }">
+		 			<c:if test="${ purchase.tranCode == '1' }">
 		 				구매완료
 		 				<c:if test="${ menu == 'manage' }">
 		 					<a href="/updateTranCodeByProd.do?prodNo=${product.prodNo }&tranCode=2"> 배송하기</a>

@@ -30,8 +30,9 @@ public class ProductDaoImpl implements ProductDao{
 	}
 
 	///Method
-	public void addProduct(Product product) throws Exception {
-		sqlSession.insert("ProductMapper.addProduct", product);
+	public int addProduct(Product product) throws Exception {
+		product.setManuDate( product.getManuDate().replaceAll("-", "") );
+		return sqlSession.insert("ProductMapper.addProduct", product);
 	}
 
 	@Override
