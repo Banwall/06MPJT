@@ -44,9 +44,9 @@
 	 </update>
 	 
 	 <select  id="getProductList"  parameterType="search"	resultMap="productSelectMap">
-	  	SELECT prod_no, prod_name, price, tran_status_code
-	  	FROM (	SELECT inner_table.prod_no, inner_table.prod_name, inner_table.price, inner_table.tran_status_code , ROWNUM AS row_seq
-	  					FROM		(	SELECT p.prod_name , p.price, p.prod_no, t.TRAN_STATUS_CODE
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT p.prod_name , p.price, p.prod_no, t.TRAN_STATUS_CODE, p.reg_date
 											FROM product p, transaction t
 											<where>
 											p.prod_no = t.tran_no(+)

@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Product;
+import com.model2.mvc.service.domain.Purchase;
 import com.model2.mvc.service.product.ProductService;
+import com.model2.mvc.service.purchase.PurchaseService;
 
 
 //==> 회원관리 Controller
@@ -28,7 +30,6 @@ public class ProductController {
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
-	//setter Method 구현 않음
 		
 	public ProductController(){
 		System.out.println(this.getClass());
@@ -46,37 +47,38 @@ public class ProductController {
 	
 	
 	@RequestMapping("/addProductView.do")
-	public String addUserView() throws Exception {
+	public String addProductView() throws Exception {
 
 		System.out.println("/addProductView.do");
 		
-		return "redirect:/product/addProductView.jsp";
+		return "forward:/product/addProductView.jsp";
 	}
 	
 	@RequestMapping("/addProduct.do")
-	public String addUser( @ModelAttribute("product") Product product ) throws Exception {
+	public String addProduct( @ModelAttribute("product") Product product ) throws Exception {
 
 		System.out.println("/addProduct.do");
 		//Business Logic
 		productService.addProduct(product);
 		
-		return "redirect:/product/listProduct.jsp";
+		return "forward:/product/addProduct.jsp";
 	}
 	
 	@RequestMapping("/getProduct.do")
-	public String getUser( @RequestParam("prodNo") int prodNo , Model model ) throws Exception {
+	public String getProduct( @RequestParam("prodNo") int prodNo , Model model , @RequestParam("menu") String menu ) throws Exception {
 		
 		System.out.println("/getProduct.do");
 		//Business Logic
 		Product product = productService.getProduct(prodNo);
 		// Model 과 View 연결
 		model.addAttribute("product", product);
+		model.addAttribute("menu", menu);
 		
 		return "forward:/product/getProduct.jsp";
 	}
 	
 	@RequestMapping("/updateProductView.do")
-	public String updateUserView( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
+	public String updateProductView( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
 
 		System.out.println("/updateProductView.do");
 		//Business Logic
@@ -88,7 +90,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/updateProduct.do")
-	public String updateUser( @ModelAttribute("product") Product product , Model model , HttpSession session) throws Exception{
+	public String updateProduct( @ModelAttribute("product") Product product , Model model , HttpSession session) throws Exception{
 
 		System.out.println("/updateProduct.do");
 		//Business Logic
@@ -104,7 +106,8 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/listProduct.do")
-	public String listUser( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
+	public String listProduct( @ModelAttribute("search") Search search , Model model , HttpServletRequest request , 
+							@RequestParam("menu") String menu ) throws Exception{
 		
 		System.out.println("/listProduct.do");
 		
@@ -122,6 +125,7 @@ public class ProductController {
 		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("menu", menu);
 		model.addAttribute("search", search);
 		
 		return "forward:/product/listProduct.jsp";

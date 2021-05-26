@@ -5,7 +5,7 @@
 	
 <html>
 <head>
-<title><c:if test="${ menu == 'manage' }">
+<title><c:if test="${menu == 'manage' }">
 			상품관리
 		</c:if>
 		<c:if test="${ menu == 'search' }">
@@ -116,39 +116,38 @@
 	<tr>
 		<td colspan="11" bgcolor="808285" height="1"></td>
 	</tr>
-	<c:set var="i" value="0"/>
-		<c:forEach var="purchase" items="${ list }">
-		<c:set var="product" value="${ purchase }"/>
-		<c:set var="i" value="${ i+1 }"/>
+		<c:forEach var="purchase" items="${list}">
+		<c:set var="product" value="${product}"/>
+		<c:set var="i" value="${i+1}"/>
 		<tr class="ct_list_pop">
 			<td align="center">${ i }</td>
 			<td></td>
 				<td align="left">
 				<c:choose>
 				<c:when test="${user.userId == 'admin'}">
-					<a href="/getProduct.do?prod_no=${product.prodNo}&menu=${menu}">${product.prodName}</a>
+					<a href="/getProduct.do?prodNo=${purchase.prodNo}&menu=${menu}">${purchase.prodName}</a>
 				</c:when>
 				<c:otherwise>
 					<c:choose>
-					<c:when test="${ empty purchase.tranCode }">
-							<a href="/getProduct.do?prod_no=${product.prodNo}&menu=${ menu }">${product.prodName }</a>
+					<c:when test="${ empty product.proTranCode }">
+							<a href="/getProduct.do?prodNo=${purchase.prodNo}&menu=${ menu }">${purchase.prodName}</a>
 					</c:when>
 					<c:otherwise>
-						${ product.prodName }
+						${purchase.prodName}
 					</c:otherwise>
 					</c:choose>
 				</c:otherwise>
 				</c:choose>
 				</td>
 		<td></td>
-		<td align="left">${ product.price}</td>
+		<td align="left">${ purchase.price }</td>
 		<td></td>
 		<td align="left"><c:choose>
-							<c:when test="${ user.role == 'user' || empty user }">
+							<c:when test="${user.role == 'user' || empty user}">
 
 							</c:when>
 							<c:otherwise>
-							${ product.regDate}
+							${ purchase.regDate}
 							</c:otherwise>
 						</c:choose>
 		</td>
@@ -156,19 +155,20 @@
 		<td align="left">
 		 	<c:choose>
 		 		<c:when test="${user.userId == 'admin'}">
-		 			<c:if test="${empty purchase.tranCode}">
+		 			<c:if test="${empty product.proTranCode}">
 		 				판매중
 		 			</c:if>
-		 			<c:if test="${ purchase.tranCode == '1' }">
+		 			<c:if test="${ product.proTranCode == '1' }">
 		 				구매완료
+		 				
 		 				<c:if test="${ menu == 'manage' }">
-		 					<a href="/updateTranCodeByProd.do?prodNo=${product.prodNo }&tranCode=2"> 배송하기</a>
+		 					<a href="/updateTranCodeByProd.do?prodNo=${product.prodNo }&proTranCode=2">배송하기</a>
 		 				</c:if>
 		 			</c:if>
-		 			<c:if test="${ purchase.tranCode == '2' }">
+		 			<c:if test="${ product.proTranCode == '2' }">
 		 				배송중
 		 			</c:if>
-		 			<c:if test="${ purchase.tranCode == '3' }">
+		 			<c:if test="${ product.proTranCode == '3' }">
 		 			<c:choose>
 		 				<c:when test="${ menu == 'manage' }">
 		 					배송완료
@@ -181,7 +181,7 @@
 		 		</c:when>
 		 		<c:otherwise>
 		 			<c:choose>
-		 				<c:when test="${ empty purchase.tranCode }">
+		 				<c:when test="${empty product.proTranCode}">
 		 					판매중
 		 				</c:when>
 		 				<c:otherwise>
