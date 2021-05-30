@@ -125,8 +125,8 @@ public class ProductController {
 		// Model °ú View ¿¬°á
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
-		model.addAttribute("menu", menu);
 		model.addAttribute("search", search);
+		model.addAttribute("menu", menu);
 		
 		return "forward:/product/listProduct.jsp";
 	}

@@ -9,7 +9,7 @@
 			상품관리
 		</c:if>
 		<c:if test="${ menu == 'search' }">
-			상품검색
+			상품목록 조회
 	</c:if>
 </title>
 
@@ -44,7 +44,7 @@
 							상품관리
 						</c:if>
 						<c:if test="${ menu == 'search' }">
-							상품검색
+							상품목록 조회
 						</c:if>
 					</td>
 				</tr>
