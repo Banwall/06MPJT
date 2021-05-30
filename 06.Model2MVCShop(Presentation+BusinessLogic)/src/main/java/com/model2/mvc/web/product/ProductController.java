@@ -86,7 +86,7 @@ public class ProductController {
 		// Model °ú View ¿¬°á
 		model.addAttribute("product", product);
 		
-		return "forward:/product/updateProduct.jsp";
+		return "forward:/product/updateProductView.jsp";
 	}
 	
 	@RequestMapping("/updateProduct.do")
@@ -102,7 +102,7 @@ public class ProductController {
 //			session.setAttribute("user", user);
 //		}
 		
-		return "redirect:/getProduct.do?prodNo="+product.getProdNo();
+		return "redirect:/getProduct.do?prodNo="+product.getProdNo()+"&menu=manage";
 	}
 	
 	@RequestMapping("/listProduct.do")
